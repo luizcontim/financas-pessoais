@@ -1,0 +1,21 @@
+meta {
+  name: Registrar Movimentacao
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/contas/{{contaId}}/movimentacoes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "tipo": "ENTRADA",
+    "descricao": "Salario",
+    "valor": 5000,
+    "categoria": "OUTROS",
+    "data": "2026-08-05"
+  }
+}

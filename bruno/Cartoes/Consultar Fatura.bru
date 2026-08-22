@@ -1,0 +1,11 @@
+meta {
+  name: Consultar Fatura
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/cartoes/{{cartaoId}}/faturas/{{anoReferencia}}/{{mesReferencia}}
+  body: none
+  auth: none
+}

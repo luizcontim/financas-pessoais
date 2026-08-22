@@ -1,0 +1,25 @@
+meta {
+  name: Criar Cartao
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/cartoes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nome": "Nubank",
+    "bandeira": "Mastercard",
+    "limite": 5000,
+    "diaFechamento": 10,
+    "diaVencimento": 17
+  }
+}
+
+script:post-response {
+  bru.setVar("cartaoId", res.body.id);
+}

@@ -1,0 +1,21 @@
+meta {
+  name: Registrar Compra
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/cartoes/{{cartaoId}}/compras
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "descricao": "Notebook",
+    "valorTotal": 3000,
+    "categoria": "OUTROS",
+    "dataCompra": "2026-08-05",
+    "quantidadeParcelas": 3
+  }
+}

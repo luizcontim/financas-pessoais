@@ -62,6 +62,27 @@ Spring. Os testes de integração (`*IT.java`) sobem um PostgreSQL real via
 **Testcontainers** — não precisa ter Postgres rodando à parte para eles, mas
 precisa do Docker ativo.
 
+## Ambiente de desenvolvimento local
+
+Editor recomendado: **VS Code**. Ao abrir o projeto (`code .`), ele sugere instalar
+as extensões em `.vscode/extensions.json` (Java, Spring Boot Tools, EditorConfig,
+YAML, SQLTools). O suporte a Lombok já vem embutido no Language Support for Java
+(Red Hat) — não precisa de extensão à parte.
+
+- **Debug**: F5 roda a configuração `FinancasPessoaisApplication` (`.vscode/launch.json`). Suba o Postgres antes (`docker compose up -d`).
+- **Tasks** (Ctrl+Shift+P → "Tasks: Run Task"): subir/derrubar o Postgres, `mvnw verify`, `mvnw spring-boot:run` — ver `.vscode/tasks.json`.
+- **Banco de dados na IDE**: a extensão SQLTools já vem pré-configurada (`.vscode/settings.json`) apontando para o Postgres do `docker-compose.yml` — abra o painel SQLTools na barra lateral para navegar nas tabelas.
+- **Estilo de código**: `.editorconfig` na raiz formaliza o padrão já usado (tabs em `.java`, 2 espaços em YAML/JSON/Markdown).
+
+### Testando a API com o Bruno
+
+A coleção fica em [`bruno/`](bruno/), versionada junto do código. Para usar:
+
+1. Abra o Bruno → **Open Collection** → selecione a pasta `bruno/` deste repositório.
+2. Selecione o ambiente **Local** (canto superior direito) — define `baseUrl=http://localhost:8080`.
+3. Com a aplicação rodando, rode primeiro **Cartoes → Criar Cartao** (ou **Contas → Criar Conta**): um script pós-resposta guarda o `id` retornado numa variável (`cartaoId`/`contaId`).
+4. Os demais requests da mesma pasta (`Registrar Compra`, `Consultar Fatura`, `Fechar Fatura` / `Registrar Movimentacao`, `Consultar Extrato`) já usam essa variável na URL — não precisa copiar UUID manualmente.
+
 ## Exemplo de fluxo (via API)
 
 ```bash

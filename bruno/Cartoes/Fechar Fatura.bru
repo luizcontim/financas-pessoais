@@ -1,0 +1,11 @@
+meta {
+  name: Fechar Fatura
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/cartoes/{{cartaoId}}/faturas/{{anoReferencia}}/{{mesReferencia}}/fechar
+  body: none
+  auth: none
+}

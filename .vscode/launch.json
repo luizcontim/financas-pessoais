@@ -1,0 +1,12 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "java",
+			"name": "FinancasPessoaisApplication",
+			"request": "launch",
+			"mainClass": "com.luizcontim.financas.FinancasPessoaisApplication",
+			"projectName": "financas-pessoais"
+		}
+	]
+}

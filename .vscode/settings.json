@@ -1,0 +1,20 @@
+{
+	"java.configuration.updateBuildConfiguration": "automatic",
+	"java.compile.nullAnalysis.mode": "automatic",
+	"maven.executable.path": "${workspaceFolder}/mvnw.cmd",
+	"files.exclude": {
+		"**/target": true
+	},
+	"editor.formatOnSave": false,
+	"sqltools.connections": [
+		{
+			"name": "financas-pessoais (docker-compose)",
+			"driver": "PostgreSQL",
+			"server": "localhost",
+			"port": 5432,
+			"database": "financas",
+			"username": "financas",
+			"password": "financas"
+		}
+	]
+}
