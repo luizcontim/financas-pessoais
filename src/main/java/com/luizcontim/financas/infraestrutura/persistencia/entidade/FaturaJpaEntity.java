@@ -1,0 +1,44 @@
+package com.luizcontim.financas.infraestrutura.persistencia.entidade;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Table(name = "fatura")
+@Getter
+@Setter
+@NoArgsConstructor
+public class FaturaJpaEntity {
+
+	@Id
+	private UUID id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cartao_id", nullable = false)
+	private CartaoCreditoJpaEntity cartao;
+
+	@Column(name = "mes_referencia")
+	private int mesReferencia;
+
+	@Column(name = "ano_referencia")
+	private int anoReferencia;
+
+	private String status;
+
+	@OneToMany(mappedBy = "fatura", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private List<ParcelaJpaEntity> parcelas = new ArrayList<>();
+}
