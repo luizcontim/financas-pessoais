@@ -62,6 +62,20 @@ Spring. Os testes de integração (`*IT.java`) sobem um PostgreSQL real via
 **Testcontainers** — não precisa ter Postgres rodando à parte para eles, mas
 precisa do Docker ativo.
 
+## Processo de desenvolvimento (Spec-Driven)
+
+Toda feature nova nasce de uma **spec** — um documento curto escrito *antes* do
+código, guardado em [`docs/specs/`](docs/specs/), a partir do
+[`TEMPLATE.md`](docs/specs/TEMPLATE.md). A spec descreve contexto, requisitos,
+casos de uso, o que fica de fora e as decisões técnicas — é o registro
+permanente do "porquê" por trás de cada pedaço do sistema, não só do "o quê".
+[`0001-nucleo-transacional.md`](docs/specs/0001-nucleo-transacional.md)
+documenta (retroativamente) o que já está implementado.
+
+Fluxo pra uma feature nova: escrever a spec → revisar se está completa → só
+então implementar, referenciando a spec no código/commits quando fizer sentido.
+A skill `.claude/skills/spec-feature` automatiza esse fluxo.
+
 ## Ambiente de desenvolvimento local
 
 Editor recomendado: **VS Code**. Ao abrir o projeto (`code .`), ele sugere instalar
@@ -73,6 +87,17 @@ YAML, SQLTools). O suporte a Lombok já vem embutido no Language Support for Jav
 - **Tasks** (Ctrl+Shift+P → "Tasks: Run Task"): subir/derrubar o Postgres, `mvnw verify`, `mvnw spring-boot:run` — ver `.vscode/tasks.json`.
 - **Banco de dados na IDE**: a extensão SQLTools já vem pré-configurada (`.vscode/settings.json`) apontando para o Postgres do `docker-compose.yml` — abra o painel SQLTools na barra lateral para navegar nas tabelas.
 - **Estilo de código**: `.editorconfig` na raiz formaliza o padrão já usado (tabs em `.java`, 2 espaços em YAML/JSON/Markdown).
+
+### IntelliJ IDEA
+
+Alternativa ao VS Code (os dois coexistem, use o que preferir no dia). Basta
+**Open** o `pom.xml` na raiz do projeto — o IntelliJ detecta o Maven, o JDK 21
+e baixa as dependências sozinho; suporte a Lombok já vem nativo desde a versão
+2020.3, sem plugin extra. Configure uma Run Configuration para
+`com.luizcontim.financas.FinancasPessoaisApplication` para rodar/debugar.
+Não versionamos `.idea/` no repo (projeto Maven puro não precisa disso pra
+abrir corretamente); a ferramenta de banco de dados fica só no VS Code via
+SQLTools (o Database Tools nativo do IntelliJ é exclusivo da versão Ultimate).
 
 ### Testando a API com o Bruno
 
@@ -104,7 +129,8 @@ curl localhost:8080/cartoes/{id}/faturas/2026/9
 
 ## Roadmap
 
-Fases futuras, deliberadamente fora deste primeiro incremento:
+Fases futuras, deliberadamente fora deste primeiro incremento. Cada uma delas
+ganha sua spec em `docs/specs/` antes de começar a implementação:
 
 - **Autenticação/multiusuário** — hoje o sistema é single-user, sem login.
 - **Dashboard** — consultas agregadas (gasto por categoria/mês) e um front-end (ou integração com uma ferramenta de BI).
