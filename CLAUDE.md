@@ -36,7 +36,7 @@ Depois de implementar ou alterar código de domínio/aplicação, use a skill `r
 
 ## Arquitetura
 
-Spring Boot 4 / Java 21, arquitetura hexagonal (ports & adapters) com as regras de negócio isoladas em `dominio`, sem nenhuma dependência de framework:
+Spring Boot 4 / Java 25, arquitetura hexagonal (ports & adapters) com as regras de negócio isoladas em `dominio`, sem nenhuma dependência de framework:
 
 ```
 com.luizcontim.financas
@@ -69,7 +69,7 @@ Decisões de domínio relevantes:
 
 ## Ambiente de desenvolvimento local
 
-- Pré-requisitos: JDK 21, Docker (`./mvnw` é o Maven Wrapper, não precisa Maven instalado).
+- Pré-requisitos: JDK 25, Docker (`./mvnw` é o Maven Wrapper, não precisa Maven instalado).
 - **VS Code**: `code .` sugere as extensões de `.vscode/extensions.json`; F5 roda `FinancasPessoaisApplication` (`.vscode/launch.json`, sobe o Postgres antes); tasks em `.vscode/tasks.json`; SQLTools já configurado (`.vscode/settings.json`) apontando para o Postgres do `docker-compose.yml`.
 - **IntelliJ**: abrir o `pom.xml` na raiz basta; `.idea/` não é versionado.
 - **API manual**: coleção do Bruno em `bruno/` (ambiente **Local** define `baseUrl`); rodar primeiro `Criar Cartao`/`Criar Conta` — um script pós-resposta guarda o `id` numa variável usada pelos demais requests da mesma pasta.

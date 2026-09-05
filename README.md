@@ -31,7 +31,7 @@ Decisões relevantes:
 
 ## Como rodar localmente
 
-Pré-requisitos: JDK 21, Docker.
+Pré-requisitos: JDK 25, Docker.
 
 ```bash
 # sobe o PostgreSQL
@@ -91,7 +91,7 @@ YAML, SQLTools). O suporte a Lombok já vem embutido no Language Support for Jav
 ### IntelliJ IDEA
 
 Alternativa ao VS Code (os dois coexistem, use o que preferir no dia). Basta
-**Open** o `pom.xml` na raiz do projeto — o IntelliJ detecta o Maven, o JDK 21
+**Open** o `pom.xml` na raiz do projeto — o IntelliJ detecta o Maven, o JDK 25
 e baixa as dependências sozinho; suporte a Lombok já vem nativo desde a versão
 2020.3, sem plugin extra. Configure uma Run Configuration para
 `com.luizcontim.financas.FinancasPessoaisApplication` para rodar/debugar.
