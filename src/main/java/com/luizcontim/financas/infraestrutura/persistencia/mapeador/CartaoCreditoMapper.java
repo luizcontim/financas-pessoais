@@ -1,5 +1,6 @@
 package com.luizcontim.financas.infraestrutura.persistencia.mapeador;
 
+import com.luizcontim.financas.dominio.modelo.Bandeira;
 import com.luizcontim.financas.dominio.modelo.CartaoDeCredito;
 import com.luizcontim.financas.dominio.modelo.Categoria;
 import com.luizcontim.financas.dominio.modelo.Compra;
@@ -23,7 +24,7 @@ public final class CartaoCreditoMapper {
 		CartaoCreditoJpaEntity entidade = new CartaoCreditoJpaEntity();
 		entidade.setId(cartao.id());
 		entidade.setNome(cartao.nome());
-		entidade.setBandeira(cartao.bandeira());
+		entidade.setBandeira(cartao.bandeira().name());
 		entidade.setLimite(cartao.limite().valor());
 		entidade.setDiaFechamento(cartao.diaFechamento());
 		entidade.setDiaVencimento(cartao.diaVencimento());
@@ -74,7 +75,7 @@ public final class CartaoCreditoMapper {
 		List<Compra> compras = entidade.getCompras().stream().map(CartaoCreditoMapper::paraDominio).toList();
 		List<Fatura> faturas = entidade.getFaturas().stream().map(CartaoCreditoMapper::paraDominio).toList();
 
-		return CartaoDeCredito.reconstruir(entidade.getId(), entidade.getNome(), entidade.getBandeira(),
+		return CartaoDeCredito.reconstruir(entidade.getId(), entidade.getNome(), Bandeira.valueOf(entidade.getBandeira()),
 				Dinheiro.de(entidade.getLimite()), entidade.getDiaFechamento(), entidade.getDiaVencimento(), compras, faturas);
 	}
 

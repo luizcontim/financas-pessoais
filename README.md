@@ -113,7 +113,7 @@ A coleção fica em [`bruno/`](bruno/), versionada junto do código. Para usar:
 ```bash
 # criar um cartão
 curl -X POST localhost:8080/cartoes -H "Content-Type: application/json" -d '{
-  "nome": "Nubank", "bandeira": "Mastercard", "limite": 5000,
+  "nome": "Nubank", "bandeira": "MASTERCARD", "limite": 5000,
   "diaFechamento": 10, "diaVencimento": 17
 }'
 

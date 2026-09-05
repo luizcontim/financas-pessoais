@@ -15,18 +15,18 @@ public final class CartaoDeCredito {
 
 	private final UUID id;
 	private final String nome;
-	private final String bandeira;
+	private final Bandeira bandeira;
 	private final Dinheiro limite;
 	private final int diaFechamento;
 	private final int diaVencimento;
 	private final List<Compra> compras = new ArrayList<>();
 	private final List<Fatura> faturas = new ArrayList<>();
 
-	private CartaoDeCredito(UUID id, String nome, String bandeira, Dinheiro limite, int diaFechamento, int diaVencimento,
+	private CartaoDeCredito(UUID id, String nome, Bandeira bandeira, Dinheiro limite, int diaFechamento, int diaVencimento,
 			List<Compra> compras, List<Fatura> faturas) {
 		this.id = Objects.requireNonNull(id);
 		this.nome = Objects.requireNonNull(nome);
-		this.bandeira = bandeira;
+		this.bandeira = Objects.requireNonNull(bandeira);
 		this.limite = Objects.requireNonNull(limite);
 		this.diaFechamento = validarDia(diaFechamento);
 		this.diaVencimento = validarDia(diaVencimento);
@@ -34,11 +34,11 @@ public final class CartaoDeCredito {
 		this.faturas.addAll(faturas);
 	}
 
-	public static CartaoDeCredito emitir(String nome, String bandeira, Dinheiro limite, int diaFechamento, int diaVencimento) {
+	public static CartaoDeCredito emitir(String nome, Bandeira bandeira, Dinheiro limite, int diaFechamento, int diaVencimento) {
 		return new CartaoDeCredito(UUID.randomUUID(), nome, bandeira, limite, diaFechamento, diaVencimento, List.of(), List.of());
 	}
 
-	public static CartaoDeCredito reconstruir(UUID id, String nome, String bandeira, Dinheiro limite, int diaFechamento,
+	public static CartaoDeCredito reconstruir(UUID id, String nome, Bandeira bandeira, Dinheiro limite, int diaFechamento,
 			int diaVencimento, List<Compra> compras, List<Fatura> faturas) {
 		return new CartaoDeCredito(id, nome, bandeira, limite, diaFechamento, diaVencimento, compras, faturas);
 	}
@@ -129,7 +129,7 @@ public final class CartaoDeCredito {
 		return nome;
 	}
 
-	public String bandeira() {
+	public Bandeira bandeira() {
 		return bandeira;
 	}
 

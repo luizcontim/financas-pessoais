@@ -1,5 +1,6 @@
 package com.luizcontim.financas.infraestrutura.web.dto;
 
+import com.luizcontim.financas.dominio.modelo.Bandeira;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 
 public record CriarCartaoRequest(
 		@NotBlank String nome,
-		String bandeira,
+		@NotNull Bandeira bandeira,
 		@NotNull @Positive BigDecimal limite,
 		@Min(1) @Max(28) int diaFechamento,
 		@Min(1) @Max(28) int diaVencimento) {
