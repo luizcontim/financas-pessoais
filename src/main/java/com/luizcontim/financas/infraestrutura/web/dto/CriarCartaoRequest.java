@@ -8,11 +8,13 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public record CriarCartaoRequest(
 		@NotBlank String nome,
 		@NotNull Bandeira bandeira,
 		@NotNull @Positive BigDecimal limite,
 		@Min(1) @Max(28) int diaFechamento,
-		@Min(1) @Max(28) int diaVencimento) {
+		@Min(1) @Max(28) int diaVencimento,
+		@NotNull UUID usuarioId) {
 }

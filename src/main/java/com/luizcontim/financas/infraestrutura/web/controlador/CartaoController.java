@@ -43,7 +43,7 @@ public class CartaoController {
 	@PostMapping
 	public ResponseEntity<CriarCartaoOutput> criar(@Valid @RequestBody CriarCartaoRequest request) {
 		CriarCartaoOutput output = criarCartaoUseCase.executar(new CriarCartaoInput(request.nome(), request.bandeira(),
-				request.limite(), request.diaFechamento(), request.diaVencimento()));
+				request.limite(), request.diaFechamento(), request.diaVencimento(), request.usuarioId()));
 		return ResponseEntity.created(URI.create("/cartoes/" + output.id())).body(output);
 	}
 

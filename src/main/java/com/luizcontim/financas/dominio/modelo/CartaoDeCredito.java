@@ -14,6 +14,7 @@ import java.util.UUID;
 public final class CartaoDeCredito {
 
 	private final UUID id;
+	private final UUID usuarioId;
 	private final String nome;
 	private final Bandeira bandeira;
 	private final Dinheiro limite;
@@ -22,9 +23,10 @@ public final class CartaoDeCredito {
 	private final List<Compra> compras = new ArrayList<>();
 	private final List<Fatura> faturas = new ArrayList<>();
 
-	private CartaoDeCredito(UUID id, String nome, Bandeira bandeira, Dinheiro limite, int diaFechamento, int diaVencimento,
-			List<Compra> compras, List<Fatura> faturas) {
+	private CartaoDeCredito(UUID id, UUID usuarioId, String nome, Bandeira bandeira, Dinheiro limite, int diaFechamento,
+			int diaVencimento, List<Compra> compras, List<Fatura> faturas) {
 		this.id = Objects.requireNonNull(id);
+		this.usuarioId = Objects.requireNonNull(usuarioId);
 		this.nome = Objects.requireNonNull(nome);
 		this.bandeira = Objects.requireNonNull(bandeira);
 		this.limite = Objects.requireNonNull(limite);
@@ -34,13 +36,15 @@ public final class CartaoDeCredito {
 		this.faturas.addAll(faturas);
 	}
 
-	public static CartaoDeCredito emitir(String nome, Bandeira bandeira, Dinheiro limite, int diaFechamento, int diaVencimento) {
-		return new CartaoDeCredito(UUID.randomUUID(), nome, bandeira, limite, diaFechamento, diaVencimento, List.of(), List.of());
+	public static CartaoDeCredito emitir(String nome, Bandeira bandeira, Dinheiro limite, int diaFechamento, int diaVencimento,
+			UUID usuarioId) {
+		return new CartaoDeCredito(UUID.randomUUID(), usuarioId, nome, bandeira, limite, diaFechamento, diaVencimento, List.of(),
+				List.of());
 	}
 
-	public static CartaoDeCredito reconstruir(UUID id, String nome, Bandeira bandeira, Dinheiro limite, int diaFechamento,
-			int diaVencimento, List<Compra> compras, List<Fatura> faturas) {
-		return new CartaoDeCredito(id, nome, bandeira, limite, diaFechamento, diaVencimento, compras, faturas);
+	public static CartaoDeCredito reconstruir(UUID id, UUID usuarioId, String nome, Bandeira bandeira, Dinheiro limite,
+			int diaFechamento, int diaVencimento, List<Compra> compras, List<Fatura> faturas) {
+		return new CartaoDeCredito(id, usuarioId, nome, bandeira, limite, diaFechamento, diaVencimento, compras, faturas);
 	}
 
 	private static int validarDia(int dia) {
@@ -123,6 +127,10 @@ public final class CartaoDeCredito {
 
 	public UUID id() {
 		return id;
+	}
+
+	public UUID usuarioId() {
+		return usuarioId;
 	}
 
 	public String nome() {

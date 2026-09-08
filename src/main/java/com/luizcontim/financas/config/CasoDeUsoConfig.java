@@ -4,11 +4,16 @@ import com.luizcontim.financas.aplicacao.casodeuso.ConsultarExtratoUseCase;
 import com.luizcontim.financas.aplicacao.casodeuso.ConsultarFaturaUseCase;
 import com.luizcontim.financas.aplicacao.casodeuso.CriarCartaoUseCase;
 import com.luizcontim.financas.aplicacao.casodeuso.CriarContaUseCase;
+import com.luizcontim.financas.aplicacao.casodeuso.CriarUsuarioUseCase;
 import com.luizcontim.financas.aplicacao.casodeuso.FecharFaturaUseCase;
+import com.luizcontim.financas.aplicacao.casodeuso.ListarCartoesDoUsuarioUseCase;
+import com.luizcontim.financas.aplicacao.casodeuso.ListarContasDoUsuarioUseCase;
 import com.luizcontim.financas.aplicacao.casodeuso.RegistrarCompraUseCase;
 import com.luizcontim.financas.aplicacao.casodeuso.RegistrarMovimentacaoUseCase;
 import com.luizcontim.financas.dominio.repositorio.CartaoRepositorio;
 import com.luizcontim.financas.dominio.repositorio.ContaRepositorio;
+import com.luizcontim.financas.dominio.repositorio.UsuarioRepositorio;
+import com.luizcontim.financas.dominio.servico.CodificadorDeSenha;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,8 +25,23 @@ import org.springframework.context.annotation.Configuration;
 public class CasoDeUsoConfig {
 
 	@Bean
-	CriarContaUseCase criarContaUseCase(ContaRepositorio contaRepositorio) {
-		return new CriarContaUseCase(contaRepositorio);
+	CriarUsuarioUseCase criarUsuarioUseCase(UsuarioRepositorio usuarioRepositorio, CodificadorDeSenha codificadorDeSenha) {
+		return new CriarUsuarioUseCase(usuarioRepositorio, codificadorDeSenha);
+	}
+
+	@Bean
+	ListarContasDoUsuarioUseCase listarContasDoUsuarioUseCase(ContaRepositorio contaRepositorio) {
+		return new ListarContasDoUsuarioUseCase(contaRepositorio);
+	}
+
+	@Bean
+	ListarCartoesDoUsuarioUseCase listarCartoesDoUsuarioUseCase(CartaoRepositorio cartaoRepositorio) {
+		return new ListarCartoesDoUsuarioUseCase(cartaoRepositorio);
+	}
+
+	@Bean
+	CriarContaUseCase criarContaUseCase(ContaRepositorio contaRepositorio, UsuarioRepositorio usuarioRepositorio) {
+		return new CriarContaUseCase(contaRepositorio, usuarioRepositorio);
 	}
 
 	@Bean
@@ -35,8 +55,8 @@ public class CasoDeUsoConfig {
 	}
 
 	@Bean
-	CriarCartaoUseCase criarCartaoUseCase(CartaoRepositorio cartaoRepositorio) {
-		return new CriarCartaoUseCase(cartaoRepositorio);
+	CriarCartaoUseCase criarCartaoUseCase(CartaoRepositorio cartaoRepositorio, UsuarioRepositorio usuarioRepositorio) {
+		return new CriarCartaoUseCase(cartaoRepositorio, usuarioRepositorio);
 	}
 
 	@Bean

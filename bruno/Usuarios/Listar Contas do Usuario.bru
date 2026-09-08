@@ -1,0 +1,11 @@
+meta {
+  name: Listar Contas do Usuario
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/usuarios/{{usuarioId}}/contas
+  body: none
+  auth: none
+}

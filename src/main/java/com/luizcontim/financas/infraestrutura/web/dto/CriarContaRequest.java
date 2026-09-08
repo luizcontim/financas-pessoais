@@ -1,6 +1,9 @@
 package com.luizcontim.financas.infraestrutura.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public record CriarContaRequest(@NotBlank String nome) {
+import java.util.UUID;
+
+public record CriarContaRequest(@NotBlank String nome, @NotNull UUID usuarioId) {
 }

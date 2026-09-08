@@ -9,23 +9,25 @@ import java.util.UUID;
 public final class Conta {
 
 	private final UUID id;
+	private final UUID usuarioId;
 	private final String nome;
 	private Dinheiro saldo;
 	private final List<Movimentacao> movimentacoes = new ArrayList<>();
 
-	private Conta(UUID id, String nome, Dinheiro saldo, List<Movimentacao> movimentacoes) {
+	private Conta(UUID id, UUID usuarioId, String nome, Dinheiro saldo, List<Movimentacao> movimentacoes) {
 		this.id = Objects.requireNonNull(id);
+		this.usuarioId = Objects.requireNonNull(usuarioId);
 		this.nome = Objects.requireNonNull(nome);
 		this.saldo = Objects.requireNonNull(saldo);
 		this.movimentacoes.addAll(movimentacoes);
 	}
 
-	public static Conta abrir(String nome) {
-		return new Conta(UUID.randomUUID(), nome, Dinheiro.ZERO, List.of());
+	public static Conta abrir(String nome, UUID usuarioId) {
+		return new Conta(UUID.randomUUID(), usuarioId, nome, Dinheiro.ZERO, List.of());
 	}
 
-	public static Conta reconstruir(UUID id, String nome, Dinheiro saldo, List<Movimentacao> movimentacoes) {
-		return new Conta(id, nome, saldo, movimentacoes);
+	public static Conta reconstruir(UUID id, UUID usuarioId, String nome, Dinheiro saldo, List<Movimentacao> movimentacoes) {
+		return new Conta(id, usuarioId, nome, saldo, movimentacoes);
 	}
 
 	public Movimentacao registrarEntrada(String descricao, Dinheiro valor, Categoria categoria, LocalDate data) {
@@ -45,6 +47,10 @@ public final class Conta {
 
 	public UUID id() {
 		return id;
+	}
+
+	public UUID usuarioId() {
+		return usuarioId;
 	}
 
 	public String nome() {

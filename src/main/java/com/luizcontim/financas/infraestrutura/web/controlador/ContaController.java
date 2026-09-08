@@ -39,7 +39,7 @@ public class ContaController {
 
 	@PostMapping
 	public ResponseEntity<CriarContaOutput> criar(@Valid @RequestBody CriarContaRequest request) {
-		CriarContaOutput output = criarContaUseCase.executar(new CriarContaInput(request.nome()));
+		CriarContaOutput output = criarContaUseCase.executar(new CriarContaInput(request.nome(), request.usuarioId()));
 		return ResponseEntity.created(URI.create("/contas/" + output.id())).body(output);
 	}
 

@@ -2,5 +2,5 @@ package com.luizcontim.financas.aplicacao.dto;
 
 import java.util.UUID;
 
-public record CriarContaInput(String nome, UUID usuarioId) {
+public record CriarUsuarioOutput(UUID id, String nome, String email) {
 }
