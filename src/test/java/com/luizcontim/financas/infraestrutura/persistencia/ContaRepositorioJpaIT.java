@@ -4,6 +4,9 @@ import com.luizcontim.financas.TestcontainersConfiguration;
 import com.luizcontim.financas.dominio.modelo.Categoria;
 import com.luizcontim.financas.dominio.modelo.Conta;
 import com.luizcontim.financas.dominio.modelo.Dinheiro;
+import com.luizcontim.financas.dominio.modelo.Email;
+import com.luizcontim.financas.dominio.modelo.SenhaHash;
+import com.luizcontim.financas.dominio.modelo.Usuario;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,9 +24,15 @@ class ContaRepositorioJpaIT {
 	@Autowired
 	private ContaRepositorioJpa contaRepositorioJpa;
 
+	@Autowired
+	private UsuarioRepositorioJpa usuarioRepositorioJpa;
+
 	@Test
 	void devePersistirERecuperarContaComMovimentacoes() {
-		Conta conta = Conta.abrir("Conta Teste");
+		Usuario usuario = Usuario.registrar("Usuário Teste", new Email("teste@example.com"), new SenhaHash("hash"));
+		usuarioRepositorioJpa.salvar(usuario);
+
+		Conta conta = Conta.abrir("Conta Teste", usuario.id());
 		conta.registrarEntrada("Salário", Dinheiro.de("3000"), Categoria.OUTROS, LocalDate.now());
 		conta.registrarSaida("Mercado", Dinheiro.de("200"), Categoria.ALIMENTACAO, LocalDate.now());
 

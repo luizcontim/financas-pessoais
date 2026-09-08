@@ -6,6 +6,7 @@ import com.luizcontim.financas.infraestrutura.persistencia.entidade.ContaJpaEnti
 import com.luizcontim.financas.infraestrutura.persistencia.mapeador.ContaMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,5 +28,10 @@ public class ContaRepositorioJpa implements ContaRepositorio {
 	@Override
 	public Optional<Conta> buscarPorId(UUID id) {
 		return springDataRepository.findById(id).map(ContaMapper::paraDominio);
+	}
+
+	@Override
+	public List<Conta> listarPorUsuario(UUID usuarioId) {
+		return springDataRepository.findByUsuarioId(usuarioId).stream().map(ContaMapper::paraDominio).toList();
 	}
 }

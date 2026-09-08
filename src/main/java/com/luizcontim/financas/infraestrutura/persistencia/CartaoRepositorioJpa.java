@@ -6,6 +6,7 @@ import com.luizcontim.financas.infraestrutura.persistencia.entidade.CartaoCredit
 import com.luizcontim.financas.infraestrutura.persistencia.mapeador.CartaoCreditoMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,5 +28,10 @@ public class CartaoRepositorioJpa implements CartaoRepositorio {
 	@Override
 	public Optional<CartaoDeCredito> buscarPorId(UUID id) {
 		return springDataRepository.findById(id).map(CartaoCreditoMapper::paraDominio);
+	}
+
+	@Override
+	public List<CartaoDeCredito> listarPorUsuario(UUID usuarioId) {
+		return springDataRepository.findByUsuarioId(usuarioId).stream().map(CartaoCreditoMapper::paraDominio).toList();
 	}
 }

@@ -12,7 +12,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CartaoDeCreditoTest {
 
-	private final CartaoDeCredito cartao = CartaoDeCredito.emitir("Nubank", Bandeira.MASTERCARD, Dinheiro.de("5000"), 10, 17);
+	private final CartaoDeCredito cartao = CartaoDeCredito.emitir("Nubank", Bandeira.MASTERCARD, Dinheiro.de("5000"), 10, 17,
+			UUID.randomUUID());
 
 	@Test
 	void compraAntesDoFechamentoCaiNaFaturaDoMesCorrente() {

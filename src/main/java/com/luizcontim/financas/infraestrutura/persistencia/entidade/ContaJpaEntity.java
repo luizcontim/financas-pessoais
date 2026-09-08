@@ -1,6 +1,7 @@
 package com.luizcontim.financas.infraestrutura.persistencia.entidade;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -24,6 +25,9 @@ public class ContaJpaEntity {
 
 	@Id
 	private UUID id;
+
+	@Column(name = "usuario_id")
+	private UUID usuarioId;
 
 	private String nome;
 

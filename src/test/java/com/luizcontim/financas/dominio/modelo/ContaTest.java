@@ -3,6 +3,7 @@ package com.luizcontim.financas.dominio.modelo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,7 +11,7 @@ class ContaTest {
 
 	@Test
 	void deveAumentarSaldoAoRegistrarEntrada() {
-		Conta conta = Conta.abrir("Conta Corrente");
+		Conta conta = Conta.abrir("Conta Corrente", UUID.randomUUID());
 
 		conta.registrarEntrada("Salário", Dinheiro.de("5000"), Categoria.OUTROS, LocalDate.now());
 
@@ -19,7 +20,7 @@ class ContaTest {
 
 	@Test
 	void deveDiminuirSaldoAoRegistrarSaida() {
-		Conta conta = Conta.abrir("Conta Corrente");
+		Conta conta = Conta.abrir("Conta Corrente", UUID.randomUUID());
 		conta.registrarEntrada("Salário", Dinheiro.de("5000"), Categoria.OUTROS, LocalDate.now());
 
 		conta.registrarSaida("Aluguel", Dinheiro.de("1500"), Categoria.MORADIA, LocalDate.now());

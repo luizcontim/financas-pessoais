@@ -23,6 +23,7 @@ public final class CartaoCreditoMapper {
 	public static CartaoCreditoJpaEntity paraEntidade(CartaoDeCredito cartao) {
 		CartaoCreditoJpaEntity entidade = new CartaoCreditoJpaEntity();
 		entidade.setId(cartao.id());
+		entidade.setUsuarioId(cartao.usuarioId());
 		entidade.setNome(cartao.nome());
 		entidade.setBandeira(cartao.bandeira().name());
 		entidade.setLimite(cartao.limite().valor());
@@ -75,8 +76,9 @@ public final class CartaoCreditoMapper {
 		List<Compra> compras = entidade.getCompras().stream().map(CartaoCreditoMapper::paraDominio).toList();
 		List<Fatura> faturas = entidade.getFaturas().stream().map(CartaoCreditoMapper::paraDominio).toList();
 
-		return CartaoDeCredito.reconstruir(entidade.getId(), entidade.getNome(), Bandeira.valueOf(entidade.getBandeira()),
-				Dinheiro.de(entidade.getLimite()), entidade.getDiaFechamento(), entidade.getDiaVencimento(), compras, faturas);
+		return CartaoDeCredito.reconstruir(entidade.getId(), entidade.getUsuarioId(), entidade.getNome(),
+				Bandeira.valueOf(entidade.getBandeira()), Dinheiro.de(entidade.getLimite()), entidade.getDiaFechamento(),
+				entidade.getDiaVencimento(), compras, faturas);
 	}
 
 	private static Compra paraDominio(CompraJpaEntity entidade) {
