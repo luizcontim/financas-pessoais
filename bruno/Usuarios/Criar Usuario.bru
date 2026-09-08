@@ -1,0 +1,23 @@
+meta {
+  name: Criar Usuario
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/usuarios
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nome": "Ana Silva",
+    "email": "ana@example.com",
+    "senha": "senha-forte-123"
+  }
+}
+
+script:post-response {
+  bru.setVar("usuarioId", res.body.id);
+}

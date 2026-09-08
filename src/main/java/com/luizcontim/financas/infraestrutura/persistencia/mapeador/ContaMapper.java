@@ -18,6 +18,7 @@ public final class ContaMapper {
 	public static ContaJpaEntity paraEntidade(Conta conta) {
 		ContaJpaEntity entidade = new ContaJpaEntity();
 		entidade.setId(conta.id());
+		entidade.setUsuarioId(conta.usuarioId());
 		entidade.setNome(conta.nome());
 		entidade.setSaldo(conta.saldo().valor());
 		entidade.setMoeda(conta.saldo().moeda());
@@ -47,7 +48,7 @@ public final class ContaMapper {
 				.map(ContaMapper::paraDominio)
 				.toList();
 
-		return Conta.reconstruir(entidade.getId(), entidade.getNome(),
+		return Conta.reconstruir(entidade.getId(), entidade.getUsuarioId(), entidade.getNome(),
 				new Dinheiro(entidade.getSaldo(), entidade.getMoeda()), movimentacoes);
 	}
 

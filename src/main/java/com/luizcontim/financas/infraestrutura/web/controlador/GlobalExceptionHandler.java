@@ -1,5 +1,6 @@
 package com.luizcontim.financas.infraestrutura.web.controlador;
 
+import com.luizcontim.financas.dominio.excecao.EmailJaCadastradoException;
 import com.luizcontim.financas.dominio.excecao.FaturaFechadaException;
 import com.luizcontim.financas.dominio.excecao.RecursoNaoEncontradoException;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,11 @@ class GlobalExceptionHandler {
 
 	@ExceptionHandler(FaturaFechadaException.class)
 	ResponseEntity<Map<String, Object>> tratarFaturaFechada(FaturaFechadaException ex) {
+		return corpo(HttpStatus.CONFLICT, ex.getMessage());
+	}
+
+	@ExceptionHandler(EmailJaCadastradoException.class)
+	ResponseEntity<Map<String, Object>> tratarEmailJaCadastrado(EmailJaCadastradoException ex) {
 		return corpo(HttpStatus.CONFLICT, ex.getMessage());
 	}
 
